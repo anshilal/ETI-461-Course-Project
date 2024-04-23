@@ -1,17 +1,24 @@
+<?php get_header(); ?>
+<div class="row">
+	<main class="col-sm-8 col-xs-12 <?php if ( ! is_active_sidebar( 'blog_sidebar' ) ) : ?>col-sm-offset-2<?php endif; ?>">
+		<?php if ( have_posts() ) : ?>
+			<div class="posts">
+				<?php
+				while ( have_posts() ) :
+					the_post();
+					get_template_part( 'templates/post-archive' );
+				endwhile;
+				?>
+			</div>
+			<?php
+			the_posts_pagination();
+		else :
+			?>
+			<h2><?php esc_html_e( 'Nothing found', 'listinghive' ); ?></h2>
+			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'listinghive' ); ?></p>
+		<?php endif; ?>
+	</main>
+	<?php get_sidebar(); ?>
+</div>
 <?php
-/**
- * Front to the WordPress application. This file doesn't do anything, but loads
- * wp-blog-header.php which does and tells WordPress to load the theme.
- *
- * @package WordPress
- */
-
-/**
- * Tells WordPress to load the WordPress theme and output it.
- *
- * @var bool
- */
-define( 'WP_USE_THEMES', true );
-
-/** Loads the WordPress Environment and Template */
-require __DIR__ . '/wp-blog-header.php';
+get_footer();
